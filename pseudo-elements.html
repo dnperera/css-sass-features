@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+    />
+    <title>Pseudo Elements</title>
+    <style>
+      .section1,
+      .section2 {
+        width: 60%;
+        margin: 40px auto;
+      }
+      .para1,
+      .para2,
+      .para3 {
+        font-size: 20px;
+        word-spacing: 5px;
+        line-height: 25px;
+      }
+
+      .para1::before {
+        content: "New Pseudo Text Before";
+        color: green;
+      }
+      .para1::after {
+        content: "New Pseudo Text After";
+        color: darkviolet;
+      }
+
+      /* Add a pseudo tool tip to link tag with attribute 'data-tool-tip */
+      a[data-tool-tip] {
+        position: relative;
+      }
+      a[data-tool-tip]::after {
+        position: absolute;
+        content: attr(data-tool-tip);
+        display: inline-block;
+        bottom: 0;
+        color: #fff;
+        font-weight: 800;
+        left: 0;
+        bottom: 0;
+        padding: 5px;
+        font-size: 15px;
+        background-color: cornflowerblue;
+        border: 1px solid black;
+        border-radius: 3px;
+        white-space: nowrap;
+        transform: scale(0);
+        transition: transform ease-out 400ms, bottom ease-out 400ms;
+      }
+
+      a[data-tool-tip]:hover::after {
+        transform: scale(1);
+        bottom: 100%;
+      }
+
+      .para2::first-letter {
+        text-transform: capitalize;
+        color: rgb(11, 82, 214);
+        font-size: 30px;
+      }
+
+      .para2::first-line {
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      /* add an image before */
+      .para3::before {
+        content: url(//unsplash.it/100/100);
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      h2::before {
+        font-family: "Font Awesome 5 Free";
+        content: "\f0e7";
+        color: red;
+        font-weight: 900;
+        font-size: 40px;
+        display: block;
+      }
+      a[href$=".pdf"]::after {
+        font-family: "Font Awesome 5 Free";
+        content: "\f1c1";
+        margin: 5px;
+        color: red;
+        font-size: 18px;
+      }
+      a[href^="http"]::after {
+        font-family: "Font Awesome 5 Free";
+        content: "\f35d";
+        font-weight: 900;
+        margin: 5px;
+        color: blue;
+        font-size: 12px;
+      }
+
+      .counters {
+        background-color: rgb(233, 227, 227);
+        padding: 10px 20px;
+        counter-reset: article-number;
+        width: 60%;
+        margin: 0 auto;
+      }
+
+      .sub-title {
+        position: relative;
+      }
+      .sub-title,
+      .counters > p {
+        margin-left: 30px;
+      }
+
+      .sub-title::before {
+        counter-increment: article-number;
+        content: counter(article-number);
+        position: absolute;
+        left: -45px;
+        top: -5px;
+        background-color: rgb(8, 94, 6);
+        width: 35px;
+        height: 35px;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 25px;
+        border: 2px solid rgb(236, 213, 1);
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      What is an pseudo element:
+      Pseudo element is a keyword added to a selector that let you style specific parts of the element
+      ::after and ::before pseudo elements let you insert conent on to a page from CSS without it needing to be in the HTML.While end results actually not be in the DOM
+    -->
+    <section class="section1">
+      <p class="para1">
+        Lorem ipsum dolor sit amet
+        <a href="#" data-tool-tip="pseudo tool tip"> consectetur</a> ,
+        adipisicing elit. Expedita eveniet necessitatibus eius nesciunt minus
+        culpa illum mollitia est quod, eaque fuga sed sequi veritatis sapiente
+        provident quae minima corporis? A!
+      </p>
+      <p class="para2">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita
+        eveniet necessitatibus eius nesciunt minus culpa illum mollitia est
+        quod, eaque fuga sed sequi veritatis sapiente provident quae minima
+        corporis? A!
+      </p>
+      <p class="para3">
+        quod, eaque fuga sed sequi veritatis sapiente provident quae minima
+        corporis? A!
+      </p>
+    </section>
+    <section class="section2">
+      <h2>How to style title with pseudo element</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur
+        <a href="viewDoc.pdf"> adipisicing elit</a>. Optio quo expedita magni
+        eius omnis in porro tempore repellendus officiis ea nulla veniam
+        necessitatibus <a href="list.pdf">perferendis</a> error at, numquam
+        placeat? Cumque, ipsam.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur
+        <a href="http://www.google.com">Google</a>. Optio quo expedita magni
+        eius omnis in porro tempore repellendus officiis ea nulla veniam
+        necessitatibus <a href="http://www.cnn.com">CNN Breaking News</a> error
+        at, numquam placeat? Cumque, ipsam.
+      </p>
+    </section>
+    <section class="counters">
+      <h3 class="sub-title">Section Headig</h3>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate sint
+        odit minus unde doloribus. Fuga dolore, et eos rem consequuntur iste,
+        explicabo itaque officia deleniti corporis repudiandae, eius qui saepe.
+      </p>
+      <h3 class="sub-title">Section Headig</h3>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate sint
+        odit minus unde doloribus. Fuga dolore, et eos rem consequuntur iste,
+        explicabo itaque officia deleniti corporis repudiandae, eius qui saepe.
+      </p>
+      <h3 class="sub-title">Section Headig</h3>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate sint
+        odit minus unde doloribus. Fuga dolore, et eos rem consequuntur iste,
+        explicabo itaque officia deleniti corporis repudiandae, eius qui saepe.
+      </p>
+      <h3 class="sub-title">Section Headig</h3>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate sint
+        odit minus unde doloribus. Fuga dolore, et eos rem consequuntur iste,
+        explicabo itaque officia deleniti corporis repudiandae, eius qui saepe.
+      </p>
+      <h3 class="sub-title">Section Headig</h3>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate sint
+        odit minus unde doloribus. Fuga dolore, et eos rem consequuntur iste,
+        explicabo itaque officia deleniti corporis repudiandae, eius qui saepe.
+      </p>
+      <h3 class="sub-title">Section Headig</h3>
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate sint
+        odit minus unde doloribus. Fuga dolore, et eos rem consequuntur iste,
+        explicabo itaque officia deleniti corporis repudiandae, eius qui saepe.
+      </p>
+    </section>
+  </body>
+</html>
